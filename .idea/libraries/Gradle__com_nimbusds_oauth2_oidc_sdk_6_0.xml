@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.nimbusds:oauth2-oidc-sdk:6.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/oauth2-oidc-sdk/6.0/e731f0b62727a46ae6d6fded62b5678d28273c3c/oauth2-oidc-sdk-6.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/oauth2-oidc-sdk/6.0/b4ae42878ffd3251013b5b9dce3d8a71a7657d9f/oauth2-oidc-sdk-6.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
