@@ -1,0 +1,9 @@
+auth:
+  oauth:
+    redirectUrls:
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect
+  token:
+    secret: "Y154QXW07069FXULN38ICJ79BSQ4750A"
+    expiration: 864000000
