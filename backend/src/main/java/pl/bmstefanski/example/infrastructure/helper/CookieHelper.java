@@ -16,7 +16,7 @@ public final class CookieHelper {
   }
 
   public static void appendCookie(String cookieName, String cookieValue, int maxAge, HttpServletResponse servletResponse) {
-    Cookie cookie = new Cookie(cookieValue, cookieName);
+    Cookie cookie = new Cookie(cookieName, cookieValue);
     cookie.setPath("/");
 
     cookie.setHttpOnly(true);

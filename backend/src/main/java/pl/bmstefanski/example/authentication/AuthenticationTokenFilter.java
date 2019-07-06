@@ -1,4 +1,4 @@
-package pl.bmstefanski.example.infrastructure.authentication;
+package pl.bmstefanski.example.authentication;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -16,24 +16,20 @@ class AuthenticationTokenFilter extends OncePerRequestFilter {
   private final AuthenticationProperties tokenProperties;
   private final AuthenticationTokenValidator tokenValidator;
   private final AuthenticationTokenProvider tokenProvider;
-  private final AuthenticationTokenCreator tokenCreator;
   private final AuthenticationUserDetailsService userDetailsService;
 
   AuthenticationTokenFilter(AuthenticationProperties tokenProperties, AuthenticationTokenValidator tokenValidator,
-      AuthenticationTokenProvider tokenProvider, AuthenticationTokenCreator tokenCreator, AuthenticationUserDetailsService userDetailsService) {
+      AuthenticationTokenProvider tokenProvider, AuthenticationUserDetailsService userDetailsService) {
     this.tokenProperties = tokenProperties;
     this.tokenValidator = tokenValidator;
     this.tokenProvider = tokenProvider;
-    this.tokenCreator = tokenCreator;
     this.userDetailsService = userDetailsService;
   }
 
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
     String jwtToken = this.obtainJwtTokenFromRequest(request);
-    String secretToken = this.tokenProperties.getSecret();
-
-    long expirationTime = this.tokenProperties.getExpiration();
+    String secretToken = this.tokenProperties.getToken().getSecret();
 
     if (jwtToken != null && this.tokenValidator.validate(jwtToken, secretToken)) {
       ObjectId userId = this.tokenProvider.obtainUserId(jwtToken, secretToken);

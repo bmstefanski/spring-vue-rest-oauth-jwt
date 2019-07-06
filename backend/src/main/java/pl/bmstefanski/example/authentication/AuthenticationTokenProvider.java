@@ -1,4 +1,4 @@
-package pl.bmstefanski.example.infrastructure.authentication;
+package pl.bmstefanski.example.authentication;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

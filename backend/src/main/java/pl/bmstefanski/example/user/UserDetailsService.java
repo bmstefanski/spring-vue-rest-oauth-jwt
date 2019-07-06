@@ -4,7 +4,7 @@ import org.bson.types.ObjectId;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-class UserDetailsService implements pl.bmstefanski.example.infrastructure.authentication.AuthenticationUserDetailsService {
+class UserDetailsService implements pl.bmstefanski.example.authentication.AuthenticationUserDetailsService {
 
   private final UserRepository userRepository;
 
@@ -14,7 +14,8 @@ class UserDetailsService implements pl.bmstefanski.example.infrastructure.authen
 
   @Override
   public UserDetails loadUserById(ObjectId id) {
-    return pl.bmstefanski.example.user.UserDetails.of(this.userRepository.fetchUserById(id));
+    User user = this.userRepository.fetchUserById(id);
+    return pl.bmstefanski.example.user.UserDetails.of(user);
   }
 
   @Override

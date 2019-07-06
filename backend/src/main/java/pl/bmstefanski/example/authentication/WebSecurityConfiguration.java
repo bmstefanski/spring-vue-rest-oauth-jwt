@@ -1,4 +1,4 @@
-package pl.bmstefanski.example.infrastructure.authentication;
+package pl.bmstefanski.example.authentication;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -15,26 +15,29 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.bmstefanski.example.authentication.userdetails.OAuth2UserDetailsService;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 @Configuration
-class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private final UserDetailsService userDetailsService;
   private final AuthenticationTokenFilter authenticationTokenFilter;
   private final OAuth2AuthorizationRequestRepository authorizationRequestRepository;
   private final OAuth2AuthenticationFailureHandler authenticationFailureHandler;
   private final OAuth2AuthenticationSuccessHandler authenticationSuccessHandler;
+  private final OAuth2UserDetailsService oAuth2UserService;
 
-  WebSecurityConfig(@Qualifier("userDetailsOAuthService") UserDetailsService userDetailsService, AuthenticationTokenFilter authenticationTokenFilter,
+  WebSecurityConfiguration(@Qualifier("authenticationUserDetailsService") UserDetailsService userDetailsService, AuthenticationTokenFilter authenticationTokenFilter,
       OAuth2AuthorizationRequestRepository authorizationRequestRepository, OAuth2AuthenticationFailureHandler authenticationFailureHandler,
-      OAuth2AuthenticationSuccessHandler authenticationSuccessHandler) {
+      OAuth2AuthenticationSuccessHandler authenticationSuccessHandler, OAuth2UserDetailsService oAuth2UserService) {
     this.userDetailsService = userDetailsService;
     this.authenticationTokenFilter = authenticationTokenFilter;
     this.authorizationRequestRepository = authorizationRequestRepository;
     this.authenticationFailureHandler = authenticationFailureHandler;
     this.authenticationSuccessHandler = authenticationSuccessHandler;
+    this.oAuth2UserService = oAuth2UserService;
   }
 
   @Override
@@ -55,20 +58,25 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .and().exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint())
         .and().authorizeRequests()
 
-        .antMatchers("/oauth2/**", "/auth/**").permitAll()
+        .antMatchers("/",
+            "/error",
+            "/favicon.ico",
+            "/**/*.png",
+            "/**/*.gif",
+            "/**/*.svg",
+            "/**/*.jpg",
+            "/**/*.html",
+            "/**/*.css",
+            "/**/*.js").permitAll()
+        .antMatchers("/auth/**", "/oauth2/**", "/api/signin", "/api/signup").permitAll()
         .anyRequest().authenticated()
 
         .and().oauth2Login().authorizationEndpoint().baseUri("/oauth2/authorize").authorizationRequestRepository(this.authorizationRequestRepository)
         .and().redirectionEndpoint().baseUri("/oauth2/callback/*")
-//        .and().userInfoEndpoint().userService(this.userDetailsService)
+        .and().userInfoEndpoint().userService(this.oAuth2UserService)
         .and().successHandler(this.authenticationSuccessHandler).failureHandler(this.authenticationFailureHandler);
 
     http.addFilterBefore(this.authenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-  }
-
-  @Bean
-  AuthenticationTokenFilter authenticationFilter() {
-    return new AuthenticationTokenFilter();
   }
 
   @Bean
@@ -78,7 +86,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean(BeanIds.AUTHENTICATION_MANAGER)
   @Override
-  public AuthenticationManager authenticationManager() throws Exception {
+  public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
   }
 

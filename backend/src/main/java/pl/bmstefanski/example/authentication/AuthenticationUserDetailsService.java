@@ -1,4 +1,4 @@
-package pl.bmstefanski.example.infrastructure.authentication;
+package pl.bmstefanski.example.authentication;
 
 import org.bson.types.ObjectId;
 import org.springframework.security.core.userdetails.UserDetails;

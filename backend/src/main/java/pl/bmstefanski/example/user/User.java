@@ -10,16 +10,24 @@ class User {
 
   @Id private ObjectId id;
   private String username;
+  private String name;
   private String password;
   private String email;
+  private String provider;
+  private String providerId;
+  private String avatar;
 
   User() {}
 
   User(UserBuilder builder) {
     this.id = builder.id;
     this.username = builder.username;
+    this.name = builder.name;
     this.password = builder.password;
     this.email = builder.email;
+    this.provider = builder.provider;
+    this.providerId = builder.providerId;
+    this.avatar = builder.avatar;
   }
 
   ObjectId getId() {
@@ -34,8 +42,20 @@ class User {
     return this.password;
   }
 
-  String getEmail() {
-    return this.email;
+  String getProvider() {
+    return this.provider;
+  }
+
+  void setUsername(String username) {
+    this.username = username;
+  }
+
+  void setName(String name) {
+    this.name = name;
+  }
+
+  void setAvatar(String avatar) {
+    this.avatar = avatar;
   }
 
 }

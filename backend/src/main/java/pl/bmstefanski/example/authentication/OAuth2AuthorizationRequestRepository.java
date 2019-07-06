@@ -1,4 +1,4 @@
-package pl.bmstefanski.example.infrastructure.authentication;
+package pl.bmstefanski.example.authentication;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

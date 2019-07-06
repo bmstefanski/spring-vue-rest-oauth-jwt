@@ -1,4 +1,4 @@
-package pl.bmstefanski.example.infrastructure.authentication;
+package pl.bmstefanski.example.authentication;
 
 import java.io.IOException;
 import java.net.URI;
@@ -46,7 +46,7 @@ class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessH
     }
 
     String redirectUrl = optionalRedirectUrl.orElse(this.getDefaultTargetUrl());
-    String token = this.tokenCreator.create(authentication, this.tokenProperties.getToken().getExpiration(), this.tokenProperties.getToken().getSecret());
+    String token = this.tokenCreator.create(authentication);
 
     return UriComponentsBuilder.fromUriString(redirectUrl).queryParam("token", token).build().toUriString();
   }

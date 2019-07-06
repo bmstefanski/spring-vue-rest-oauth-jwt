@@ -3,9 +3,7 @@ package pl.bmstefanski.example.infrastructure.converter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ObjectToMapConverter implements Converter<Map<String, Object>, Object> {
 
   private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
