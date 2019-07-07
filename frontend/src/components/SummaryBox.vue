@@ -19,8 +19,6 @@
             br
             strong Identifier:
               span.font-weight-normal.ml-2 4189234189hDNASJDIASUHJJM!@&*(#Y
-
-
 </template>
 <style scoped>
   .avatar-md {
