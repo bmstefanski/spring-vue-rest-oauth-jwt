@@ -13,3 +13,5 @@ spring:
             scope:
               - user:email
               - read:user
+server:
+  port: 3000
