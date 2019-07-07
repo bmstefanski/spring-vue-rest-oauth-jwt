@@ -12,10 +12,9 @@
           .form-group
             label Password
             input.form-control(type='password')
-          .form-group
-            a(:href="signInWithGithubUrl")
-              button.btn.btn-raised.btn-lg.btn-block(type='button') Sign in with GitHub
-                i.fab.fa-github.float-left.mt-1
+          .form-groupa
+            a.btn.btn-raised.btn-lg.btn-block(:href="signInWithGithubUrl") Sign in with GitHub
+              i.fab.fa-github.float-left.mt-1
         .card-footer.text-right
           button.btn.btn-raised.btn-secondary(type='submit') sign in
 </template>

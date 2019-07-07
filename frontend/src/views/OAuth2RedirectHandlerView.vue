@@ -1,6 +1,4 @@
 <script>
-  import {routes} from "../main";
-
   export default {
     render: (createElement) => createElement('h5', "Redirecting..."),
     methods: {
@@ -16,11 +14,10 @@
         localStorage.setItem('accessToken', token);
         this.$notify.success('Successfully logged in');
       } else {
-        this.$notify.error('An error occurred while trying to signin')
+        this.$notify.error('An error occurred while trying to signin');
       }
 
-      this.$root.currentRoute = '/';
-      window.history.pushState(null, routes['/'], '/');
+      this.$router.push('/');
     }
   }
 </script>

@@ -2,32 +2,53 @@
   .container
     .row
       .col-sm-8
-        SummaryBox
+        SummaryBox(:avatar="avatar", :id="id", :name="name", :provider="provider", :providerId="providerId", :username="username", :email="email")
         RequestsResultBox
       .col-sm-4
-        SignInBox
-        SignUpBox
+        template(v-if="!isAuthorized")
+          SignInBox
+          SignUpBox
+        template(v-else)
+          LogoutBox
 </template>
 <script>
   import SignInBox from "../components/SignInBox";
   import SignUpBox from "../components/SignUpBox";
   import SummaryBox from "../components/SummaryBox";
   import RequestsResultBox from "../components/RequestsResultBox";
+  import LogoutBox from "../components/LogoutBox";
+
   import {USER_DETAILS} from "../constants";
 
   export default {
+    data: () => ({
+      avatar: '',
+      id: '',
+      name: '',
+      provider: '',
+      providerId: '',
+      username: '',
+      email: ''
+    }),
     components: {
       SignInBox,
       SignUpBox,
       SummaryBox,
-      RequestsResultBox
+      RequestsResultBox,
+      LogoutBox
+    },
+    computed: {
+      isAuthorized() {
+        return this.id !== ""
+      }
     },
     created() {
-      this.$http.get(USER_DETAILS)
+      console.log(localStorage.getItem('accessToken'));
+
+      this.$http.get(USER_DETAILS, {headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}})
       .then(response => {
-        console.log(response);
-        console.log(response.data);
-      })
+        ({avatar: this.avatar, id: this.id, name: this.name, provider: this.provider, providerId: this.providerId, username: this.username, email: this.email} = response.data)
+      });
     }
   }
 </script>
