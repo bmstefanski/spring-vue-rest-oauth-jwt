@@ -7,8 +7,8 @@ spring:
       client:
         registration:
           github:
-            clientId: d3e47fc2ddd966fa4352
-            clientSecret: 3bc0f6b8332f93076354c2a5bada2f5a05aea60d
+            clientId: c7d6a497a031cb6fe753
+            clientSecret: 9ef701a40c5d080bd8d45176960e8fcce7de3a48
             redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
               - user:email

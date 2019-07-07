@@ -6,7 +6,7 @@
       .card-body
         .row
           .col-sm-3
-            img.avatar-rounded.avatar-md(src="@/assets/default_avatar.png", alt='...')
+            img.avatar-rounded.avatar-md(src="@/assets/default_avatar.png", alt='...').mb-3
           .col-sm-9
             strong Username:
               span.font-weight-normal.ml-2 zerion1

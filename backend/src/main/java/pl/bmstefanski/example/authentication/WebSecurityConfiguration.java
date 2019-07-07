@@ -56,21 +56,7 @@ class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .formLogin().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and().exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint())
-        .and().authorizeRequests()
-
-        .antMatchers("/",
-            "/error",
-            "/favicon.ico",
-            "/**/*.png",
-            "/**/*.gif",
-            "/**/*.svg",
-            "/**/*.jpg",
-            "/**/*.html",
-            "/**/*.css",
-            "/**/*.js").permitAll()
-        .antMatchers("/auth/**", "/oauth2/**", "/api/signin", "/api/signup").permitAll()
-        .anyRequest().authenticated()
-
+        .and().authorizeRequests().antMatchers("/auth/**", "/oauth2/**").permitAll()
         .and().oauth2Login().authorizationEndpoint().baseUri("/oauth2/authorize").authorizationRequestRepository(this.authorizationRequestRepository)
         .and().redirectionEndpoint().baseUri("/oauth2/callback/*")
         .and().userInfoEndpoint().userService(this.oAuth2UserService)

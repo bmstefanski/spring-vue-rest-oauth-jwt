@@ -13,11 +13,18 @@
             label Password
             input.form-control(type='password')
           .form-group
-            button.btn.btn-raised.btn-lg.btn-block(type='button') Sign in with GitHub
-              i.fab.fa-github.float-left.mt-1
+            a(:href="signInWithGithubUrl")
+              button.btn.btn-raised.btn-lg.btn-block(type='button') Sign in with GitHub
+                i.fab.fa-github.float-left.mt-1
         .card-footer.text-right
           button.btn.btn-raised.btn-secondary(type='submit') sign in
 </template>
 <script>
-  export default {}
+  import {GITHUB_OAUTH_URL} from "../constants";
+
+  export default {
+    data: () => ({
+      signInWithGithubUrl: GITHUB_OAUTH_URL
+    })
+  }
 </script>

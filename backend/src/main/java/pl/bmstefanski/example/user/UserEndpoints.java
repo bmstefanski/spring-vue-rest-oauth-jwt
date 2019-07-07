@@ -22,8 +22,8 @@ class UserEndpoints {
 
   @RequiresAuthenticated
   @GetMapping("me")
-  ResponseEntity<UserDetails> fetchCurrentUser(@AuthenticatedUser UserDetails userDetails) {
-    return ResponseEntity.ok(userDetails);
+  ResponseEntity<User> fetchCurrentUser(@AuthenticatedUser UserDetails userDetails) {
+    return ResponseEntity.ok(this.userRepository.fetchUserByUsername(userDetails.getUsername()));
   }
 
   @RequiresAuthenticated
