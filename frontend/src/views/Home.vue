@@ -42,13 +42,16 @@
         return this.id !== ""
       }
     },
+    methods: {
+      fetchUser() {
+        this.$http.get(USER_DETAILS, {headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}})
+        .then(response => {
+          ({avatar: this.avatar, id: this.id, name: this.name, provider: this.provider, providerId: this.providerId, username: this.username, email: this.email} = response.data)
+        });
+      }
+    },
     created() {
-      console.log(localStorage.getItem('accessToken'));
-
-      this.$http.get(USER_DETAILS, {headers: {Authorization: `Bearer ${localStorage.getItem('accessToken')}`}})
-      .then(response => {
-        ({avatar: this.avatar, id: this.id, name: this.name, provider: this.provider, providerId: this.providerId, username: this.username, email: this.email} = response.data)
-      });
+      this.fetchUser();
     }
   }
 </script>

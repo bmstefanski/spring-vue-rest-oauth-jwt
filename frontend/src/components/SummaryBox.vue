@@ -5,10 +5,10 @@
         h5.my-1.font-weight-normal Welcome, {{name}}
       .card-body
         .row
-          .col-sm-3
+          .col-sm-3.mb-4
             img.avatar-rounded.avatar-md(v-if="avatar !== null", :src="avatar")
             img.avatar-rounded.avatar-md(v-else, src="@/assets/default_avatar.png", alt='...')
-          .col-sm-9.mt-4
+          .col-sm-9
             strong Username:
               span.font-weight-normal.ml-2 {{username}}
             br
