@@ -2,7 +2,7 @@
   .col-sm-12
     .card(v-if="id !== ''")
       .card-header
-        h5.my-1.font-weight-normal Welcome, {{name}}
+        h5.my-1.font-weight-normal Welcome, {{name || username}}
       .card-body
         .row
           .col-sm-3.mb-4
