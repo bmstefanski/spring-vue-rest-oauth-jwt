@@ -34,10 +34,7 @@
     methods: {
       handleSignup() {
         this.$http.post(SIGNUP_ENDPOINT_URL, {username: this.username, name: this.name, email: this.email, password: this.password}, {})
-        .then(response => {
-          console.log(response.data);
-          this.$notify.success('Successfully singed up');
-        })
+        .then(() => this.$notify.success('Successfully singed up'))
         .catch(error => {
           if (error.response.status === 409) {
             this.$notify.error('User already exists');
